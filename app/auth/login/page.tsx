@@ -10,7 +10,7 @@ const Login = () => {
         <p className="mt-1 text-center text-xs text-slate-400">
           A solo un paso de las recetas más deliciosas!
         </p>
-        <LoginForm />
+        {/* <LoginForm /> */}
       </div>
     </section>
   );
