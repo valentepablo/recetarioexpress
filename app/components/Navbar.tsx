@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex h-16 items-center justify-between px-3">
+    <div className="flex h-16 items-center justify-between px-2">
       {username ? (
         <h1 className="text-lg font-extrabold text-rose-500">
           Hola, {username} &#128075;

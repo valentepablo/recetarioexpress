@@ -76,7 +76,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit} className="mt-8 space-y-4">
+      <form onSubmit={onSubmit} className="mt-16 space-y-4">
         <div>
           <label className="mb-1 block text-xs text-slate-500">
             Nombre de usuario
