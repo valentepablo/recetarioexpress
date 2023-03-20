@@ -10,7 +10,7 @@ const Register = () => {
         <p className="mt-1 text-center text-xs text-slate-400">
           Accede a miles de recetas increíbles!
         </p>
-        {/* <RegisterForm /> */}
+        <RegisterForm />
       </div>
     </section>
   );

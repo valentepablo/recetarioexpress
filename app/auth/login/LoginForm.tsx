@@ -50,8 +50,10 @@ const LoginForm = () => {
       console.log(data);
 
       setCookies("access_token", data.token);
-      localStorage.setItem("userID", data.userID);
-      localStorage.setItem("username", data.username);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userID", data.userID);
+        localStorage.setItem("username", data.username);
+      }
 
       setUser({ username: "", password: "" });
       router.push("/");

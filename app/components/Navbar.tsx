@@ -2,14 +2,14 @@
 import Link from "next/link";
 import { useCookies } from "react-cookie";
 import { HiLogout, HiLogin } from "react-icons/hi";
-import getUserID from "../hooks/getUserID";
+import { useGetUserID } from "../hooks/useGetUserID";
+import { useGetUsername } from "../hooks/useGetUsername";
 
 const Navbar = () => {
   const [_, __, removeCookie] = useCookies(["access_token"]);
 
-  const user = getUserID();
-
-  const username = window.localStorage.getItem("username");
+  const user = useGetUserID();
+  const username = useGetUsername();
 
   const logout = () => {
     removeCookie("access_token");
