@@ -89,8 +89,9 @@ const CreateRecipeForm = () => {
     });
   };
 
+  let user: any = useGetUserID();
+
   useEffect(() => {
-    const user = useGetUserID();
     setReceta({
       ...receta,
       createdBy: user!,
