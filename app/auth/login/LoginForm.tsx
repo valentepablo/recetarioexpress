@@ -47,7 +47,6 @@ const LoginForm = () => {
           },
         }
       );
-      console.log(data);
 
       setCookies("access_token", data.token);
       if (typeof window !== "undefined") {

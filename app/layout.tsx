@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={lato.className}>
-      <body className="bg-rose-50">
+      <body className="bg-zinc-50">
         <Navbar />
         <main>{children}</main>
       </body>
