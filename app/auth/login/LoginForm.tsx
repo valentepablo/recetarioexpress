@@ -30,29 +30,35 @@ const LoginForm = () => {
       if (user.password === "") {
         return;
       }
-      const { data } = await toast.promise(
-        axios.post(
-          "https://recetarioexpress-api.onrender.com/auth/login",
-          user
-        ),
-        {
-          pending: "Ingresando a la cuenta...",
-          error: {
-            render({ data }: any) {
-              return (
-                <span className="text-sm">{data.response.data.response}</span>
-              );
-            },
-            icon: false,
-          },
-        }
+      // const { data } = await toast.promise(
+      //   axios.post(
+      //     "https://recetarioexpress-api.onrender.com/auth/login",
+      //     user
+      //   ),
+      //   {
+      //     pending: {
+      //       render() {
+      //         return "Intentando ingresar a la cuenta...";
+      //       },
+      //     },
+      //     error: {
+      //       render({ data }: any) {
+      //         return (
+      //           <span className="text-sm">{data.response.data.response}</span>
+      //         );
+      //       },
+      //     },
+      //   }
+      // );
+      const { data } = await axios.post(
+        "https://recetarioexpress-api.onrender.com/auth/login",
+        user
       );
 
       setCookies("access_token", data.token);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("userID", data.userID);
-        localStorage.setItem("username", data.username);
-      }
+
+      localStorage.setItem("userID", data.userID);
+      localStorage.setItem("username", data.username);
 
       setUser({ username: "", password: "" });
       router.push("/");

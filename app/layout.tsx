@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={lato.className}>
-      <body className="bg-zinc-50">
+    <html lang="es">
+      <body className={`${lato.className} bg-zinc-50`}>
         <Navbar />
         <main>{children}</main>
       </body>
