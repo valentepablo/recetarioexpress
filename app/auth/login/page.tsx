@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 const Login = () => {
   return (
     <section className="p-4">
-      <div className="w-full rounded-xl bg-white p-10 shadow-xl shadow-rose-200">
+      <div className="w-full rounded-xl bg-white p-10 shadow-xl shadow-zinc-200">
         <h2 className="mx-auto text-center text-[22px] font-bold leading-6 text-zinc-700">
           Ingresa a tu cuenta
         </h2>

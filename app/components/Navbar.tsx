@@ -1,23 +1,15 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { HiLogout, HiLogin } from "react-icons/hi";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useGetUsername } from "../hooks/useGetUsername";
 
 const Navbar = () => {
-  const [username, setUsername] = useState("");
-  const [user, setUser] = useState("");
   const [_, __, removeCookie] = useCookies(["access_token"]);
 
-  let getUser: any = useGetUserID();
-  let getUsername: any = useGetUsername();
-
-  useEffect(() => {
-    setUser(getUser);
-    setUsername(getUsername);
-  }, []);
+  const user = useGetUserID();
+  const username = useGetUsername();
 
   const logout = () => {
     removeCookie("access_token");
@@ -27,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div className="flex h-16 items-center justify-between px-4">
-      {username! ? (
+      {username ? (
         <h1 className="text-lg font-extrabold text-rose-500">
           Hola, {username} &#128075;
         </h1>
