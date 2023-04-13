@@ -2,7 +2,7 @@ import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
-    <section className="flex min-h-screen items-center justify-center p-4">
+    <section className="flex justify-center px-4 pt-10">
       <div className="w-full rounded-xl bg-white p-10 shadow-xl shadow-zinc-200">
         <h2 className="mx-auto text-center text-[22px] font-bold leading-6 text-zinc-700">
           Ingresa a tu cuenta

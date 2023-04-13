@@ -2,11 +2,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useCookies } from "react-cookie";
-import { HiOutlineLogout, HiOutlineLogin } from "react-icons/hi";
+import { HiOutlineLogout, HiOutlineLogin, HiMenu } from "react-icons/hi";
+import { BiChevronRight } from "react-icons/bi";
 import { MdPostAdd } from "react-icons/md";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useGetUsername } from "../hooks/useGetUsername";
-import { HiMenu } from "react-icons/hi";
 import { Menu } from "@headlessui/react";
 
 const Navbar = () => {
@@ -53,11 +53,11 @@ const NavMenu = ({
 }) => {
   return (
     <Menu>
-      <Menu.Button>
+      <Menu.Button className="focus:outline-none">
         <HiMenu className="h-6 w-6" />
       </Menu.Button>
-      <Menu.Items className="absolute right-0 top-14 z-10 rounded-lg border border-zinc-300 bg-zinc-50 p-2">
-        <p className="rounded-lg bg-rose-50 p-4 text-center font-bold text-rose-400">
+      <Menu.Items className="absolute right-0 top-14 z-10 w-52 rounded-lg border border-zinc-200 bg-zinc-50 p-2 shadow-lg focus:outline-none">
+        <p className="mb-2 rounded-lg bg-rose-50 p-3 text-center font-bold text-rose-400">
           {username ? (
             <span>{username} &#128075;</span>
           ) : (
@@ -84,17 +84,23 @@ const NavMenu = ({
                 href="/crear-receta"
                 className="flex items-center justify-between gap-2 py-2 text-sm text-zinc-800 transition hover:text-rose-500"
               >
-                <MdPostAdd className="h-4 w-4 text-zinc-600" />
-                <span>Nueva receta</span>
+                <div className="flex items-center gap-2">
+                  <MdPostAdd className="h-4 w-4 text-zinc-600 " />
+                  <span>Nueva receta</span>
+                </div>
+                <BiChevronRight className="h-4 w-4" />
               </Link>
             </Menu.Item>
             <Menu.Item>
               <button
-                className="flex items-center justify-between gap-2 py-2 text-sm text-zinc-800 transition hover:text-rose-500"
+                className="flex w-full items-center justify-between gap-2 pt-2 text-sm text-zinc-800 transition hover:text-rose-500"
                 onClick={logout}
               >
-                <HiOutlineLogout className="h-4 w-4 text-zinc-600" />
-                <span>Cerrar sesión</span>
+                <div className="flex items-center gap-2">
+                  <HiOutlineLogout className="h-4 w-4 text-zinc-600" />
+                  <span>Cerrar sesión</span>
+                </div>
+                <BiChevronRight className="h-4 w-4" />
               </button>
             </Menu.Item>
           </div>
