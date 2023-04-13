@@ -1,5 +1,4 @@
 import "./globals.css";
-import Navbar from "./components/Navbar";
 import { Lato } from "next/font/google";
 
 const lato = Lato({
@@ -21,7 +20,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${lato.className} bg-zinc-50`}>
-        <Navbar />
         <main>{children}</main>
       </body>
     </html>
