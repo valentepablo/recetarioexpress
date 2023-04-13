@@ -14,11 +14,12 @@ const Navbar = () => {
   const [userID, setUserID] = useState("");
   const [_, __, removeCookie] = useCookies(["access_token"]);
 
+  const getUsername: any = useGetUsername();
+  const getUserID: any = useGetUserID();
+
   useEffect(() => {
-    const username: any = useGetUsername();
-    const userID: any = useGetUserID();
-    setUsername(username);
-    setUserID(userID);
+    setUsername(getUsername);
+    setUserID(getUserID);
   }, []);
 
   const logout = () => {
