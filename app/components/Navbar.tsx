@@ -59,7 +59,7 @@ const NavMenu = ({
       <Menu.Items className="absolute right-0 top-14 z-10 w-52 rounded-lg border border-zinc-200 bg-zinc-50 p-2 shadow-lg focus:outline-none">
         <p className="mb-2 rounded-lg bg-rose-50 p-3 text-center font-bold text-rose-400">
           {username ? (
-            <span>{username} &#128075;</span>
+            <span className="capitalize">{username} &#128075;</span>
           ) : (
             <span>Mi cuenta</span>
           )}
@@ -72,8 +72,11 @@ const NavMenu = ({
                 href="/auth/login"
                 className="flex items-center justify-between text-sm text-zinc-800 transition hover:text-rose-500"
               >
-                <HiOutlineLogin className="h-4 w-4 text-zinc-600" />
-                <span>Ingresar</span>
+                <div className="flex items-center gap-2">
+                  <HiOutlineLogin className="h-4 w-4 text-zinc-600" />
+                  <span>Ingresar</span>
+                </div>
+                <BiChevronRight className="h-4 w-4" />
               </Link>
             </Menu.Item>
           </div>

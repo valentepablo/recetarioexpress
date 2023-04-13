@@ -30,29 +30,10 @@ const LoginForm = () => {
       if (user.password === "") {
         return;
       }
-      // const { data } = await toast.promise(
-      //   axios.post(
-      //     "https://recetarioexpress-api.onrender.com/auth/login",
-      //     user
-      //   ),
-      //   {
-      //     pending: {
-      //       render() {
-      //         return "Intentando ingresar a la cuenta...";
-      //       },
-      //     },
-      //     error: {
-      //       render({ data }: any) {
-      //         return (
-      //           <span className="text-sm">{data.response.data.response}</span>
-      //         );
-      //       },
-      //     },
-      //   }
-      // );
+
       const { data } = await axios.post(
         "https://recetarioexpress-api.onrender.com/auth/login",
-        user
+        { ...user, username: user.username.toLowerCase() }
       );
 
       setCookies("access_token", data.token);

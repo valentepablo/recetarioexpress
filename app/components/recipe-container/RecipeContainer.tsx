@@ -27,9 +27,13 @@ const RecipeContainer = async () => {
   const { recipes } = await getData();
   return (
     <div className="mb-4 space-y-4">
-      {recipes.map((recipe: Recipe) => (
-        <Recipe key={recipe._id} recipe={recipe} />
-      ))}
+      {recipes.length === 0 ? (
+        <span className="font-semibold">No se encontró ninguna receta!</span>
+      ) : (
+        recipes.map((recipe: Recipe) => (
+          <Recipe key={recipe._id} recipe={recipe} />
+        ))
+      )}
     </div>
   );
 };

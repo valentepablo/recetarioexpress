@@ -30,11 +30,12 @@ const RegisterForm = () => {
       if (user.password === "") {
         return;
       }
+
       const { data } = await toast.promise(
-        axios.post(
-          "https://recetarioexpress-api.onrender.com/auth/register",
-          user
-        ),
+        axios.post("https://recetarioexpress-api.onrender.com/auth/register", {
+          ...user,
+          username: user.username.toLowerCase(),
+        }),
         {
           pending: "Creando usuario...",
           error: {
