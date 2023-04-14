@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import { BiListPlus } from "react-icons/bi";
 
 interface initialProps {
-  name: String;
-  veggie: Boolean;
-  ingredients: String[];
-  instructions: String[];
-  image?: String;
-  cookingTime: Number;
-  createdBy: String;
+  name: string;
+  veggie: boolean;
+  ingredients: string[];
+  instructions: string[];
+  image?: string;
+  cookingTime: number;
+  createdBy: string;
 }
 
 const CreateRecipeForm = () => {
@@ -23,7 +23,7 @@ const CreateRecipeForm = () => {
     veggie: false,
     ingredients: [],
     instructions: [],
-    image: "",
+    image: "https://i.blogs.es/87930e/comidas-ricas/1366_2000.jpg",
     cookingTime: 0,
     createdBy: "",
   });
@@ -46,7 +46,6 @@ const CreateRecipeForm = () => {
       );
       console.log(res);
       router.push("/");
-      router.refresh();
     } catch (error) {
       console.log(error);
     }

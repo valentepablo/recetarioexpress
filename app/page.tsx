@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="px-4">
       <Navbar />
-      <SearchBar />
+      {/* <SearchBar /> */}
       {/* @ts-expect-error Async Server Component */}
       <RecipeContainer />
     </div>

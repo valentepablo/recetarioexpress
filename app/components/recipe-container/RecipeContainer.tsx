@@ -4,7 +4,9 @@ import { Recipe } from "./Recipe";
 async function getData() {
   const res = await fetch(
     "https://recetarioexpress-api.onrender.com/api/recipes",
-    { cache: "no-store" }
+    {
+      cache: "force-cache",
+    }
   );
 
   return res.json();
@@ -12,14 +14,14 @@ async function getData() {
 
 interface Recipe {
   _id: Key;
-  name: String;
-  veggie: Boolean;
-  ingredients: String[];
-  instructions: String[];
-  image: String;
-  cookingTime: Number;
+  name: string;
+  veggie: boolean;
+  ingredients: string[];
+  instructions: string[];
+  image: string;
+  cookingTime: number;
   createdBy: {
-    username: String;
+    username: string;
   };
 }
 
