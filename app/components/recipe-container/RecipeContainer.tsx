@@ -5,7 +5,7 @@ async function getData() {
   const res = await fetch(
     "https://recetarioexpress-api.onrender.com/api/recipes",
     {
-      cache: "force-cache",
+      cache: "no-cache",
     }
   );
 
