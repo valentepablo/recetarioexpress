@@ -1,5 +1,5 @@
-import { Key } from "react";
 import { Recipe } from "./Recipe";
+import { RecipeInterface } from "../../interfaces/Recipe";
 
 async function getData() {
   const res = await fetch(
@@ -12,27 +12,14 @@ async function getData() {
   return res.json();
 }
 
-interface Recipe {
-  _id: Key;
-  name: string;
-  veggie: boolean;
-  ingredients: string[];
-  instructions: string[];
-  image: string;
-  cookingTime: number;
-  createdBy: {
-    username: string;
-  };
-}
-
 const RecipeContainer = async () => {
   const { recipes } = await getData();
   return (
-    <div className="mb-4 space-y-4">
+    <div className="mb-4 grid grid-cols-1 gap-3">
       {recipes.length === 0 ? (
         <span className="font-semibold">No se encontró ninguna receta!</span>
       ) : (
-        recipes.map((recipe: Recipe) => (
+        recipes.map((recipe: RecipeInterface) => (
           <Recipe key={recipe._id} recipe={recipe} />
         ))
       )}
