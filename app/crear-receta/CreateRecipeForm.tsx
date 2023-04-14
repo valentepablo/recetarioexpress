@@ -46,7 +46,6 @@ const CreateRecipeForm = () => {
       );
       console.log(res);
       router.push("/");
-      location.reload();
     } catch (error) {
       console.log(error);
     }
