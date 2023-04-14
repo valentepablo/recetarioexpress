@@ -24,7 +24,9 @@ export const Recipe = ({ recipe }: Props) => {
       // href={`/recetas/${recipe.name.split(" ").join("-").toLowerCase()}`}
       className="flex h-48 flex-col justify-between rounded-lg bg-gradient-to-b from-rose-400 to-rose-900 p-4 text-white"
     >
-      <p className="text-xs text-zinc-200">{recipe.createdBy.username}</p>
+      <p className="text-xs capitalize text-zinc-200">
+        {recipe.createdBy.username}
+      </p>
       <div>
         <p className="text-lg font-semibold">{recipe.name}</p>
         <div className="flex items-center justify-between">

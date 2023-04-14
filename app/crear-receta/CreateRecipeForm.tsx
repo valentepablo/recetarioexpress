@@ -5,13 +5,14 @@ import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
+import { BiListPlus } from "react-icons/bi";
 
 interface initialProps {
   name: String;
   veggie: Boolean;
   ingredients: String[];
   instructions: String[];
-  image: String;
+  image?: String;
   cookingTime: Number;
   createdBy: String;
 }
@@ -30,7 +31,8 @@ const CreateRecipeForm = () => {
   const [cookie, _] = useCookies(["access_token"]);
   const router = useRouter();
 
-  const ref = useRef<HTMLInputElement>(null);
+  const ingredientRef = useRef<HTMLInputElement>(null);
+  const instructionRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,9 +44,8 @@ const CreateRecipeForm = () => {
           headers: { authorization: cookie.access_token },
         }
       );
-      alert("Receta creada con exito!");
-      router.push("/");
       console.log(res);
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -66,14 +67,14 @@ const CreateRecipeForm = () => {
 
   const addIngredient = () => {
     const newIngredients = receta.ingredients;
-    if (ref.current !== null) {
-      newIngredients.push(ref.current.value);
+    if (ingredientRef.current !== null) {
+      newIngredients.push(ingredientRef.current.value);
     }
     setReceta({
       ...receta,
       ingredients: [...newIngredients],
     });
-    ref.current!.value = "";
+    ingredientRef.current!.value = "";
   };
 
   const removeIngredient = (e: any) => {
@@ -89,6 +90,30 @@ const CreateRecipeForm = () => {
     });
   };
 
+  const addInstruction = () => {
+    const newInstructions = receta.instructions;
+    if (instructionRef.current !== null) {
+      newInstructions.push(instructionRef.current.value);
+    }
+    setReceta({
+      ...receta,
+      instructions: [...newInstructions],
+    });
+    instructionRef.current!.value = "";
+  };
+
+  const removeInstruction = (e: any) => {
+    const instruction = e.target.textContent;
+    let newInstructions = receta.instructions;
+    if (receta.instructions.includes(instruction)) {
+      newInstructions = newInstructions.filter((el) => el !== instruction);
+    }
+    setReceta({
+      ...receta,
+      instructions: newInstructions,
+    });
+  };
+
   let user: any = useGetUserID();
 
   useEffect(() => {
@@ -99,8 +124,8 @@ const CreateRecipeForm = () => {
   }, []);
 
   return (
-    <form className="space-y-4" onSubmit={onSubmit}>
-      <div>
+    <form className="divide-y-[1px]" onSubmit={onSubmit}>
+      <div className="pt-2 pb-6">
         <label htmlFor="name" className="mb-1 text-sm text-zinc-800">
           Titulo
         </label>
@@ -111,27 +136,30 @@ const CreateRecipeForm = () => {
           className="w-full rounded-lg bg-zinc-200 bg-opacity-50 p-2 text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
         />
       </div>
-      <div>
+      <div className="py-6 ">
         <div className="mb-1 flex items-center justify-between">
           <label htmlFor="ingredients" className="text-sm">
             Ingredientes
           </label>
+        </div>
+        <div className="flex items-center gap-4">
+          <input
+            ref={ingredientRef}
+            type="text"
+            name="ingredients"
+            className="w-full rounded-lg bg-zinc-200 bg-opacity-50 p-2 text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
+          />
           <button
             onClick={addIngredient}
             type="button"
-            className="text-sm text-zinc-800 underline"
+            className="flex items-center gap-1 text-sm text-zinc-700"
           >
-            Agregar
+            <BiListPlus className="h-4 w-4" />
+            <span>Agregar</span>
           </button>
         </div>
-        <input
-          ref={ref}
-          type="text"
-          name="ingredients"
-          className="w-full rounded-lg bg-zinc-200 bg-opacity-50 p-2 text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
-        />
-        {receta.ingredients.length > 0 ? (
-          <div className="flex flex-wrap gap-2 py-2">
+        {receta.ingredients.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-4">
             {receta.ingredients.map((ingredient, i) => (
               <p
                 onClick={(e) => removeIngredient(e)}
@@ -145,30 +173,58 @@ const CreateRecipeForm = () => {
               </p>
             ))}
           </div>
-        ) : null}
+        )}
       </div>
-      <div>
+      <div className="py-6 ">
         <label htmlFor="instructions" className="mb-1 text-sm text-zinc-800">
           Instrucciones
         </label>
-        <input
-          type="text"
-          name="instructions"
-          className="w-full rounded-lg bg-zinc-200 bg-opacity-50 p-2 text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
-        />
+        <div className="flex items-center gap-4">
+          <input
+            ref={instructionRef}
+            type="text"
+            name="instructions"
+            className="w-full rounded-lg bg-zinc-200 bg-opacity-50 p-2 text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
+          />
+          <button
+            onClick={addInstruction}
+            type="button"
+            className="flex items-center gap-1 text-sm text-zinc-700"
+          >
+            <BiListPlus className="h-4 w-4" />
+            <span>Agregar</span>
+          </button>
+        </div>
+        {receta.instructions.length > 0 && (
+          <ul className="mt-4 list-inside list-decimal space-y-1 divide-y p-2">
+            {receta.instructions.map((instruction, i) => (
+              <li
+                className="relative flex items-center justify-between py-1 text-sm"
+                key={i}
+              >
+                <span className="w-full " onClick={removeInstruction}>
+                  {instruction}
+                </span>
+                <span className="pointer-events-none absolute top-0 right-0 flex h-3 w-3 translate-y-1/2 items-center justify-center rounded-full bg-red-300 text-white">
+                  &times;
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      <div>
+      <div className="py-6">
         <label htmlFor="image" className="mb-1 text-sm text-zinc-800">
-          Imagen
+          Imagen <strong>(no funciona)</strong>
         </label>
         <input
           onChange={handleChange}
           type="text"
           name="image"
-          className="w-full rounded-lg bg-zinc-200 bg-opacity-50 p-2 text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
+          className="w-full rounded-lg py-2 text-sm text-zinc-500 outline-none transition placeholder:text-zinc-400 placeholder:text-opacity-60 focus:ring focus:ring-rose-300"
         />
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 py-6">
         <div className="flex items-center gap-2">
           <label htmlFor="cookingTime" className="mb-1 text-sm text-zinc-800">
             Tiempo de cocción
